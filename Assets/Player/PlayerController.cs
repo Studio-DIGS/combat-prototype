@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace TarodevController {
@@ -10,7 +11,9 @@ namespace TarodevController {
     /// if there's enough interest. You can play and compete for best times here: https://tarodev.itch.io/
     /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/GqeHHnhHpz
     /// </summary>
-    public class PlayerController : MonoBehaviour, IPlayerController {
+    public class PlayerController : MonoBehaviour, IPlayerController
+    {
+        [SerializeField] private Animator _anim;
         // Public for external hooks
         public Vector3 Velocity { get; private set; }
         public FrameInput Input { get; private set; }
@@ -61,6 +64,8 @@ namespace TarodevController {
             if (Input.JumpDown) {
                 _lastJumpPressed = Time.time;
             }
+            
+            if (Input.X != 0) transform.localScale = new Vector3(Input.X > 0 ? 1 : -1, 1, 1);
         }
 
         #endregion
@@ -167,10 +172,15 @@ namespace TarodevController {
                 // Apply bonus at the apex of a jump
                 var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
                 _currentHorizontalSpeed += apexBonus * Time.deltaTime;
+                
+                // Play animation
+                _anim.Play("Run");
             }
             else {
                 // No input. Let's slow the character down
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+
+                _anim.Play("Idle");
             }
 
             if (_currentHorizontalSpeed > 0 && _colRight || _currentHorizontalSpeed < 0 && _colLeft) {
@@ -240,6 +250,8 @@ namespace TarodevController {
                 _coyoteUsable = false;
                 _timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
+
+                _anim.Play("Jump");
             }
             else {
                 JumpingThisFrame = false;

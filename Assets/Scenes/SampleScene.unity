@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 166630950}
   - component: {fileID: 166630951}
   m_Layer: 7
-  m_Name: Capsule
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,9 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71aee92b034ad41b3b570fceb78f7e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 166630951}
   _characterBounds:
     m_Center: {x: 0, y: -0.04, z: 0}
-    m_Extent: {x: 0.41, y: 0.58, z: 0}
+    m_Extent: {x: 0.35, y: 0.52, z: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
