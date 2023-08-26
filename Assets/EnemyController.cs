@@ -7,11 +7,16 @@ public class EnemyController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Vector2 startingPosition;
+    [SerializeField] private ParticleSystem particles;
+    
+    //access the particle module, in this case MainModule
+    private ParticleSystem.MainModule pMain;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startingPosition = transform.position;
+        pMain = particles.main;
     }
     
     void Update()
@@ -20,6 +25,9 @@ public class EnemyController : MonoBehaviour
         {
             ResetPos();
         }
+
+        var emission = particles.emission;
+        emission.rateOverTime = rb.velocity.sqrMagnitude * 5f;
     }
 
     public void Hit(Vector2 knockback)
