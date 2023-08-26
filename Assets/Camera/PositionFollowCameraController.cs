@@ -21,6 +21,16 @@ namespace Obscura
         private Vector3 cameraPosition;
         private LineRenderer cameraLineRenderer;
         private PlayerController playerController;
+        
+        public float freezeDuration = 0.5f;
+        public float shakeDuration = 0.1f;
+        public float shakeMagnitude = 0.1f;
+
+        private float freezeTimer;
+        private float shakeTimer;
+        private bool isFrozen;
+        private bool isShaking;
+        private Vector3 originalCameraPosition;
 
         private void Awake()
         {
@@ -40,6 +50,38 @@ namespace Obscura
         //Use the LateUpdate message to avoid setting the camera's position before
         //GameObject locations are finalized.
         void LateUpdate()
+        {
+            if (isFrozen)
+            {
+                freezeTimer -= Time.unscaledDeltaTime;
+                if (freezeTimer <= 0f)
+                {
+                    isFrozen = false;
+                    Time.timeScale = 1f; // Resume normal time scale
+                }
+            }
+            if (isShaking)
+            {
+                if (shakeTimer > 0f)
+                {
+                    Vector3 shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+                    transform.position = originalCameraPosition + shakeOffset;
+                    shakeTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    transform.position = originalCameraPosition;
+                    isShaking = false;
+                }
+            }
+
+            if (!isShaking && !isFrozen)
+            {
+                SmoothPositionFollow();
+            }
+        }
+
+        private void SmoothPositionFollow()
         {
             targetPosition = this.Target.transform.position;
             cameraPosition = this.managedCamera.transform.position;
@@ -104,6 +146,26 @@ namespace Obscura
             cameraLineRenderer.SetPosition(4, new Vector3(-crosshairLength, 0, z));
             cameraLineRenderer.SetPosition(5, new Vector3(0, 0, z));
             cameraLineRenderer.SetPosition(6, new Vector3(0, -crosshairLength, z));
+        }
+        
+        public void FreezeScreen()
+        {
+            if (!isFrozen)
+            {
+                isFrozen = true;
+                freezeTimer = freezeDuration;
+                Time.timeScale = 0f; // Pause the game by setting time scale to 0
+            }
+        }
+        
+        public void ShakeScreen()
+        {
+            if (!isShaking)
+            {
+                originalCameraPosition = transform.position;
+                shakeTimer = shakeDuration;
+                isShaking = true;
+            }
         }
     }
 }

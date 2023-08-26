@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Obscura;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     private float lastClickedTime;
     private int comboCounter;
 
+    [SerializeField] private PositionFollowCameraController camera;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackTime = 0.1f;
@@ -50,6 +52,21 @@ public class PlayerCombat : MonoBehaviour
             foreach (Collider2D enemy in hitEnemies)
             {
                 enemy.GetComponent<EnemyController>().Hit(knockback);
+            }
+            
+            if (hitEnemies.Length > 0)
+            {
+                // Screen shake and freeze
+                if (comboCounter == combo.Count - 1)
+                {
+                    var halfTime = anim.GetCurrentAnimatorStateInfo(0).length / 2;
+                    camera.Invoke("ShakeScreen", halfTime);
+                    camera.Invoke("FreezeScreen", halfTime);
+                }
+                else
+                {
+                    camera.ShakeScreen();
+                }
             }
 
             lastClickedTime = Time.time;
