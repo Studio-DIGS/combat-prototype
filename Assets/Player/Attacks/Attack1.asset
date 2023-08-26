@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorOV: {fileID: 22100000, guid: 9ee4fba0bf9814813a3c9bc75dc563d5, type: 2}
   damage: 0
-  knockback: {x: 25, y: 75}
+  knockback: {x: 10, y: 128.1}
+  freezeFrame: 0
