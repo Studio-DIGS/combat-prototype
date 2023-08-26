@@ -12,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     private float lastClickedTime;
     private int comboCounter;
 
+    [SerializeField] private GameObject hitEffect;
     [SerializeField] private PositionFollowCameraController camera;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange;
@@ -62,7 +63,7 @@ public class PlayerCombat : MonoBehaviour
         // Handle damage and knockback here
         Vector2 knockback = new Vector2(combo[comboCounter].knockback.x * transform.localScale.x,
             combo[comboCounter].knockback.y);
-        
+
         if (comboCounter == combo.Count - 1)
         {
             var waitTime = anim.GetCurrentAnimatorStateInfo(0).length * combo[comboCounter].freezeFrame;
@@ -73,6 +74,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            Instantiate(hitEffect, attackPoint);
             enemy.GetComponent<EnemyController>().Hit(knockback);
         }
     }
