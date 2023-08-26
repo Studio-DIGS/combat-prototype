@@ -29,75 +29,29 @@ namespace TarodevController {
         void Update() {
             if (_player == null) return;
 
-            // Flip the sprite
-            if (_player.Input.X != 0) transform.localScale = new Vector3(_player.Input.X > 0 ? 1 : -1, 1, 1);
+            // X movement
+            _anim.SetFloat(XMovementKey, Mathf.Abs(_movement.x));
+            
+            // Y movement
+            _anim.SetFloat(YMovementKey, _movement.y);
+            
+            if (_player.LandingThisFrame) {
+                _anim.SetBool(GroundedKey, true);
+            }
 
-            // // Lean while running
-            // var targetRotVector = new Vector3(0, 0, Mathf.Lerp(-_maxTilt, _maxTilt, Mathf.InverseLerp(-1, 1, _player.Input.X)));
-            // _anim.transform.rotation = Quaternion.RotateTowards(_anim.transform.rotation, Quaternion.Euler(targetRotVector), _tiltSpeed * Time.deltaTime);
-            //
-            // // Speed up idle while running
-            // _anim.SetFloat(IdleSpeedKey, Mathf.Lerp(1, _maxIdleSpeed, Mathf.Abs(_player.Input.X)));
-            //
-            // // Splat
-            // if (_player.LandingThisFrame) {
-            //     _anim.SetTrigger(GroundedKey);
-            //     _source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
-            // }
-            //
-            // // Jump effects
-            // if (_player.JumpingThisFrame) {
-            //     _anim.SetTrigger(JumpKey);
-            //     _anim.ResetTrigger(GroundedKey);
-            //
-            //     // Only play particles when grounded (avoid coyote)
-            //     if (_player.Grounded) {
-            //         SetColor(_jumpParticles);
-            //         SetColor(_launchParticles);
-            //         _jumpParticles.Play();
-            //     }
-            // }
-            //
-            // // Play landing effects and begin ground movement effects
-            // if (!_playerGrounded && _player.Grounded) {
-            //     _playerGrounded = true;
-            //     _moveParticles.Play();
-            //     _landParticles.transform.localScale = Vector3.one * Mathf.InverseLerp(0, _maxParticleFallSpeed, _movement.y);
-            //     SetColor(_landParticles);
-            //     _landParticles.Play();
-            // }
-            // else if (_playerGrounded && !_player.Grounded) {
-            //     _playerGrounded = false;
-            //     _moveParticles.Stop();
-            // }
-            //
-            // // Detect ground color
-            // var groundHit = Physics2D.Raycast(transform.position, Vector3.down, 2, _groundMask);
-            // if (groundHit && groundHit.transform.TryGetComponent(out SpriteRenderer r)) {
-            //     _currentGradient = new ParticleSystem.MinMaxGradient(r.color * 0.9f, r.color * 1.2f);
-            //     SetColor(_moveParticles);
-            // }
+            if (_player.JumpingThisFrame) {
+                _anim.SetTrigger(JumpKey);
+                _anim.SetBool(GroundedKey, false);
+            }
 
             _movement = _player.RawMovement; // Previous frame movement is more valuable
         }
 
-        // private void OnDisable() {
-        //     _moveParticles.Stop();
-        // }
-        //
-        // private void OnEnable() {
-        //     _moveParticles.Play();
-        // }
-
-        // void SetColor(ParticleSystem ps) {
-        //     var main = ps.main;
-        //     main.startColor = _currentGradient;
-        // }
-
         #region Animation Keys
 
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");
-        private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
+        private static readonly int XMovementKey = Animator.StringToHash("XMovement");
+        private static readonly int YMovementKey = Animator.StringToHash("YMovement");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
 
         #endregion
