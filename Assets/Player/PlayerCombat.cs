@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,11 @@ public class PlayerCombat : MonoBehaviour
     public List<AttackSO> combo;
     private float lastClickedTime;
     private int comboCounter;
-    
+
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange;
     [SerializeField] private float attackTime = 0.1f;
+    [SerializeField] private LayerMask enemyLayer;
     [Range(0, 1)] [SerializeField] private float animationTimeMax = 0.9f;
     [SerializeField] Animator anim;
     
@@ -40,6 +44,11 @@ public class PlayerCombat : MonoBehaviour
             anim.Play("Attack", 0, 0);
 
             // Handle damage and knockback here
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyController>().Hit(combo[comboCounter].knockback);
+            }
 
             lastClickedTime = Time.time;
             comboCounter++;
@@ -59,5 +68,10 @@ public class PlayerCombat : MonoBehaviour
     {
         isAttacking = false;
         comboCounter = 0;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
