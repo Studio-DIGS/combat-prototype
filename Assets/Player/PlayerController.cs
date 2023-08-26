@@ -44,6 +44,11 @@ namespace TarodevController {
             MoveCharacter(); // Actually perform the axis movement
         }
 
+        public float GetCurrentVelocity()
+        {
+            return (Velocity.magnitude);
+        }
+
 
         #region Gather Input
 
