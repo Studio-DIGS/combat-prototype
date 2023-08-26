@@ -44,10 +44,12 @@ public class PlayerCombat : MonoBehaviour
             anim.Play("Attack", 0, 0);
 
             // Handle damage and knockback here
+            Vector2 knockback = new Vector2(combo[comboCounter].knockback.x * transform.localScale.x,
+                combo[comboCounter].knockback.y);
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyController>().Hit(combo[comboCounter].knockback);
+                enemy.GetComponent<EnemyController>().Hit(knockback);
             }
 
             lastClickedTime = Time.time;
