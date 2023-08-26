@@ -23,6 +23,8 @@ namespace TarodevController {
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
+        [SerializeField] private PlayerCombat combat;
+
         // This is horrible, but for some reason colliders are not fully established when update starts...
         private bool _active;
         void Awake() => Invoke(nameof(Activate), 0.5f);
@@ -161,7 +163,7 @@ namespace TarodevController {
         [SerializeField] private float _apexBonus = 2;
 
         private void CalculateWalk() {
-            if (Input.X != 0) {
+            if (Input.X != 0 && !combat.isAttacking) {
                 // Set horizontal move speed
                 _currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
 
@@ -244,6 +246,7 @@ namespace TarodevController {
                 _coyoteUsable = false;
                 _timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
+                combat.EndCombo();
             }
             else {
                 JumpingThisFrame = false;

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public bool isAttacking;
     public List<AttackSO> combo;
     private float lastClickedTime;
-    private float lastComboEnd;
     private int comboCounter;
-
-    [SerializeField] private float comboCooldown = 0.3f;
+    
     [SerializeField] private float attackTime = 0.1f;
     [Range(0, 1)] [SerializeField] private float animationTimeMax = 0.9f;
     [SerializeField] Animator anim;
@@ -33,8 +32,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        if (comboCounter <= combo.Count && Time.time - lastClickedTime > attackTime)
+        if (comboCounter < combo.Count && Time.time - lastClickedTime > attackTime)
         {
+            isAttacking = true;
             // play animation with currently set attack animation
             anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
             anim.Play("Attack", 0, 0);
@@ -55,9 +55,9 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void EndCombo()
+    public void EndCombo()
     {
+        isAttacking = false;
         comboCounter = 0;
-        lastComboEnd = Time.time;
     }
 }
