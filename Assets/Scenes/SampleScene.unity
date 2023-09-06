@@ -331,9 +331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   combo:
-  - {fileID: 11400000, guid: 1cca3aefa86544d96817f23b4f866e82, type: 2}
-  - {fileID: 11400000, guid: 1cca3aefa86544d96817f23b4f866e82, type: 2}
-  - {fileID: 11400000, guid: 366bad8a6e5774c338740e3ebe23f9ec, type: 2}
+  - {fileID: 11400000, guid: 88f2776e37e254e809a81d4ddd08dc4f, type: 2}
+  - {fileID: 11400000, guid: 88f2776e37e254e809a81d4ddd08dc4f, type: 2}
+  - {fileID: 11400000, guid: 41ac37404ef094ff78532c3fcb178b68, type: 2}
   hitEffect: {fileID: 364024045567505960, guid: d1d73a03f82b74871b4ed9dca454836a, type: 3}
   camera: {fileID: 519420033}
   attackPoint: {fileID: 1673472889}
@@ -687,7 +687,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101222305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.23, y: -0.55, z: 0}
+  m_LocalPosition: {x: 8.92, y: -0.76, z: 0}
   m_LocalScale: {x: 2.32, y: 11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

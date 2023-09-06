@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 54
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,127 +107,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player sword atk 64x64_0
+      name: SwordAttack_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15729d47530854545bfd9edf09b959a1
-      internalID: -1050059255
+      spriteID: a49dbbfb7e9e44d71b1724b1ef9018b7
+      internalID: 515027310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player sword atk 64x64_1
+      name: SwordAttack_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32e07d1d43c0e4a9c8b97f8bdf4f98b6
-      internalID: 163527778
+      spriteID: 7a63d2aee824843fd94e37e5877d7572
+      internalID: 1720011652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player sword atk 64x64_2
+      name: SwordAttack_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9faccb4023254e44a2e1cd8f00a471c
-      internalID: -1010688350
+      spriteID: 60ec0db5b0c12478e833bbfbaa3010a4
+      internalID: 542124393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player sword atk 64x64_3
+      name: SwordAttack_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4466d359559df40ddb639ded7732e823
-      internalID: -1856581337
+      spriteID: 376db287f96d84981845496cb51cd7b3
+      internalID: 357406542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player sword atk 64x64_4
+      name: SwordAttack_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05749ef45e1054e25ac8e1c532b52883
-      internalID: -1193818009
+      spriteID: f8c10b9212e304e20ab19ad254785fed
+      internalID: 287382359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player sword atk 64x64_5
+      name: SwordAttack_5
       rect:
         serializedVersion: 2
         x: 320
-        y: 0
+        y: 7
         width: 64
-        height: 64
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 089192d06a40941ed8772ed14eaeb3be
-      internalID: -1440124573
+      spriteID: d2fd9b3c21b534dab9a48d6ebf9476f4
+      internalID: -1831731249
       vertices: []
       indices: 
       edges: []
@@ -243,12 +243,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player sword atk 64x64_0: -1050059255
-      player sword atk 64x64_1: 163527778
-      player sword atk 64x64_2: -1010688350
-      player sword atk 64x64_3: -1856581337
-      player sword atk 64x64_4: -1193818009
-      player sword atk 64x64_5: -1440124573
+      SwordAttack_0: 515027310
+      SwordAttack_1: 1720011652
+      SwordAttack_2: 542124393
+      SwordAttack_3: 357406542
+      SwordAttack_4: 287382359
+      SwordAttack_5: -1831731249
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
