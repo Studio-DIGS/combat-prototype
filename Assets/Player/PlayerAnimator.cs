@@ -9,6 +9,7 @@ namespace TarodevController {
     /// </summary>
     public class PlayerAnimator : MonoBehaviour {
         [SerializeField] private Animator _anim;
+        [SerializeField] private AnimatorOverrideController _animOV;
         // [SerializeField] private AudioSource _source;
         [SerializeField] private LayerMask _groundMask;
         // [SerializeField] private ParticleSystem _jumpParticles, _launchParticles;
@@ -28,6 +29,12 @@ namespace TarodevController {
 
         void Update() {
             if (_player == null) return;
+
+            // Override Animations when holding sword
+            // if (holdingSword)
+            // {
+            //     _anim.runtimeAnimatorController = _animOV;
+            // }
 
             // X movement
             _anim.SetFloat(XMovementKey, Mathf.Abs(_movement.x));

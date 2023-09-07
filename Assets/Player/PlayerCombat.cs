@@ -7,8 +7,11 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public bool isAttacking;
-    public List<AttackSO> combo;
+    [HideInInspector] public bool isAttacking;
+    public bool holdingSword;
+    [SerializeField] private List<AttackSO> unamredCombo;
+    [SerializeField] private List<AttackSO> armedCombo;
+    private List<AttackSO> combo;
     private float lastClickedTime;
     private int comboCounter;
 
@@ -18,13 +21,16 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float attackTime = 0.1f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask swordLayer;
+    [SerializeField] private float pickupRange;
     [Range(0, 1)] [SerializeField] private float animationTimeMax = 0.9f;
     [SerializeField] Animator anim;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        holdingSword = false;
+        combo = unamredCombo;
     }
 
     // Update is called once per frame
@@ -34,7 +40,13 @@ public class PlayerCombat : MonoBehaviour
         
         if (Input.GetButtonDown("Fire1"))
         {
+            combo = (holdingSword) ? armedCombo : unamredCombo; // choose which combo depending on weapon equipped
             Attack();
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            PickupSword();
         }
     }
 
@@ -97,5 +109,18 @@ public class PlayerCombat : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.color = Color.grey;
+        Gizmos.DrawWireCube(transform.position, new Vector3(pickupRange, pickupRange));
+    }
+
+    public void PickupSword()
+    {
+        Collider2D sword = Physics2D.OverlapCircle(transform.position, pickupRange, swordLayer);
+        if (sword)
+        {
+            Debug.Log("pickup");
+            Destroy(sword.gameObject);
+            holdingSword = true;
+        }
     }
 }
