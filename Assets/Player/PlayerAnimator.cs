@@ -12,13 +12,6 @@ namespace TarodevController {
         [SerializeField] private AnimatorOverrideController _animOV;
         // [SerializeField] private AudioSource _source;
         [SerializeField] private LayerMask _groundMask;
-        // [SerializeField] private ParticleSystem _jumpParticles, _launchParticles;
-        // [SerializeField] private ParticleSystem _moveParticles, _landParticles;
-        // [SerializeField] private AudioClip[] _footsteps;
-        // [SerializeField] private float _maxTilt = .1f;
-        // [SerializeField] private float _tiltSpeed = 1;
-        // [SerializeField, Range(1f, 3f)] private float _maxIdleSpeed = 2;
-        // [SerializeField] private float _maxParticleFallSpeed = -40;
 
         private IPlayerController _player;
         private bool _playerGrounded;
@@ -29,12 +22,6 @@ namespace TarodevController {
 
         void Update() {
             if (_player == null) return;
-
-            // Override Animations when holding sword
-            // if (holdingSword)
-            // {
-            //     _anim.runtimeAnimatorController = _animOV;
-            // }
 
             // X movement
             _anim.SetFloat(XMovementKey, Mathf.Abs(_movement.x));

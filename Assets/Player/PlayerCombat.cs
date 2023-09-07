@@ -8,7 +8,8 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class PlayerCombat : MonoBehaviour
 {
     [HideInInspector] public bool isAttacking;
-    public bool holdingSword;
+    [HideInInspector] public bool holdingSword;
+    [SerializeField] private AnimatorOverrideController swordAnimOV;
     [SerializeField] private List<AttackSO> unamredCombo;
     [SerializeField] private List<AttackSO> armedCombo;
     private List<AttackSO> combo;
@@ -120,6 +121,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Debug.Log("pickup");
             Destroy(sword.gameObject);
+            anim.runtimeAnimatorController = swordAnimOV;
             holdingSword = true;
         }
     }
