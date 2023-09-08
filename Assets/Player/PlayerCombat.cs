@@ -18,8 +18,8 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private PositionFollowCameraController camera;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange;
+    // [SerializeField] private Transform attackPoint;
+    // [SerializeField] private float attackRange;
     [SerializeField] private float attackTime = 0.1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask swordLayer;
@@ -60,10 +60,15 @@ public class PlayerCombat : MonoBehaviour
             anim.runtimeAnimatorController = combo[comboCounter].animatorOV;
             anim.Play("Attack", 0, 0);
 
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+            Vector3 offset = new Vector2(combo[comboCounter].hitboxPosition.x * transform.localScale.x, 
+                combo[comboCounter].hitboxPosition.y);
+            Vector2 hitboxPosition = transform.position + offset;
+            Collider2D[] hitEnemies =
+                Physics2D.OverlapBoxAll(hitboxPosition, combo[comboCounter].hitboxSize, 0f, enemyLayer);
+
             if (hitEnemies.Length > 0)
             {
-                StartCoroutine(HandleHit(hitEnemies));
+                StartCoroutine(HandleHit(hitEnemies, hitboxPosition));
             }
             
             lastClickedTime = Time.time;
@@ -71,7 +76,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    IEnumerator HandleHit(Collider2D[] hitEnemies)
+    IEnumerator HandleHit(Collider2D[] hitEnemies, Vector2 hitboxPosition)
     {
         // Handle damage and knockback here
         Vector2 knockback = new Vector2(combo[comboCounter].knockback.x * transform.localScale.x,
@@ -87,7 +92,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Instantiate(hitEffect, attackPoint);
+            Instantiate(hitEffect, hitboxPosition, Quaternion.identity);
             enemy.GetComponent<EnemyController>().Hit(knockback);
         }
     }
@@ -109,7 +114,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.color = Color.grey;
         Gizmos.DrawWireCube(transform.position, new Vector3(pickupRange, pickupRange));
     }

@@ -32,7 +32,6 @@ public class EnemyController : MonoBehaviour
 
     public void Hit(Vector2 knockback)
     {
-        Debug.Log("Got hit with " + knockback + " force");
         rb.AddForce(knockback);
     }
 

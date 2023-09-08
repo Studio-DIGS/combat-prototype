@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4116c7d089e4e9f9780c3768e8c305e, type: 3}
   m_Name: Attack1
   m_EditorClassIdentifier: 
+  hitboxPosition: {x: 0.5525999, y: -0.05770707}
+  hitboxSize: {x: 0.84, y: 0.48}
   animatorOV: {fileID: 22100000, guid: 9ee4fba0bf9814813a3c9bc75dc563d5, type: 2}
   damage: 0
   knockback: {x: 10, y: 128.1}
